@@ -18,45 +18,51 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-type TestProvider struct {
-	input      string
-	dimensions [2]string
-	bombs      map[int][]int
-	hints      map[int][]int
-	output     string
-}
-
-var data TestProvider
-
 var _ = Describe("Miner", func() {
 
-	data.input = "3 4\n*...\n..*.\n...."
-	data.dimensions = [2]string{"3", "4"} // todo howto converto to string?
-	data.bombs = map[int][]int{
-		0: []int{1, 0, 0, 0},
-		1: []int{0, 0, 1, 0},
-		2: []int{0, 0, 0, 0},
+	input := "3 4\n*...\n..*.\n...."
+	dim := [2]int{3, 4} // todo howto converto to string?
+	bombs := [][]int{
+		[]int{1, 0, 0, 0},
+		[]int{0, 0, 1, 0},
+		[]int{0, 0, 0, 0},
 	}
-	data.hints = map[int][]int{
-		0: []int{-1, 2, 1, 1},
-		1: []int{1, 2, -1, 1},
-		2: []int{0, 1, 1, 1},
+	hints := [][]int{
+		[]int{-1, 2, 1, 1},
+		[]int{1, 2, -1, 1},
+		[]int{0, 1, 1, 1},
 	}
-	data.output = "*211\n12*1\n0111"
+
+	output := "*211\n12*1\n0111"
 
 	It("detects dimensions of table", func() {
-		Expect(ParseInput(data.input).dimensions).To(Equal(data.dimensions))
+		Expect(ParseInput(input).Dimensions).To(Equal(dim))
 	})
 
-	It("gives us bombs positions from string", func() {
-		// Expect(FindBombs(data.input)).To(Equal(data.bombs))
+	It("it returns bombs position in array", func() {
+		Expect(ParseInput(input).Bombs).To(Equal(bombs))
 	})
 
-	It("gives us bombs positions from string", func() {
-		// Expect(GetHints(data.input)).To(Equal(data.hints))
+	It("gets dimensions from string", func() {
+		x, y := GetDimensions("3 4")
+		Expect(x).To(Equal(3))
+		Expect(y).To(Equal(4))
 	})
 
-	It("gives us bombs positions from string", func() {
-		// Expect(Play(data.input)).To(Equal(data.hints))
+	It("counts bombs around point", func() {
+		tab := [][]int{
+			[]int{1, 1, 1},
+			[]int{1, 0, 1},
+			[]int{0, 1, 1},
+		}
+		Expect(CountBombs(tab, 1, 1)).To(Equal(7))
+	})
+
+	It("returns bombs hints", func() {
+		Expect(ParseInput(input).Hints).To(Equal(hints))
+	})
+
+	It("returns output as string", func() {
+		Expect(ParseInput(input).Output).To(Equal(output))
 	})
 })
