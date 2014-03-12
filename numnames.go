@@ -99,6 +99,11 @@ func spellHundrets(number int) string {
 }
 
 func spellTens(number int) string {
+
+	if isPredefined(number) {
+		return predefined[number]
+	}
+
 	spelled := ""
 	ten := 10 * (number / 10)
 	one := number % 10
