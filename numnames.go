@@ -46,14 +46,6 @@ func isPredefined(number int) bool {
 	return ok
 }
 
-func getS(number int) string {
-	if number <= 1 {
-		return ""
-	}
-
-	return "s"
-}
-
 func findDivisor(number int) int {
 	divisor := 1
 	for {
@@ -86,16 +78,25 @@ func spellBasic(number int) string {
 
 func spellHundrets(number int) string {
 	hundreds := number / 100
+	tens := number % 100
 	if number == 0 {
 		return ""
 	}
 
 	spelled := ""
 	if hundreds > 0 {
-		spelled = predefined[hundreds] + " hundred and "
+		spelled = predefined[hundreds] + " hundred"
 	}
 
-	return spelled + spellTens(number%100)
+	if hundreds > 0 && tens > 0 {
+		spelled += " and "
+	}
+
+	if tens > 0 {
+		spelled += spellTens(tens)
+	}
+
+	return spelled
 }
 
 func spellTens(number int) string {
@@ -135,14 +136,13 @@ func Spell(number int) string {
 	spelled := ""
 
 	divided := divideNumber(number)
-	s, div, sub := "", "", ""
+	div, sub := "", ""
 
 	for multiplier, num := range divided {
 		if multiplier > 1 {
-			div = " " + divisors[multiplier]
-			s = getS(num) + " "
+			div = " " + divisors[multiplier] + " "
 		} else {
-			s, div = "", ""
+			div = ""
 		}
 
 		if isPredefined(num) {
@@ -151,7 +151,7 @@ func Spell(number int) string {
 			sub = spellHundrets(num)
 		}
 
-		spelled += sub + div + s
+		spelled += sub + div
 	}
 
 	return spelled

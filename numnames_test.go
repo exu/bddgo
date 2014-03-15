@@ -29,11 +29,11 @@ var hundreds = map[int]string{
 }
 
 var tousands = map[int]string{
-	898982332876: "eight hundred and ninety eight billions nine hundred and eighty two millions three hundred and thirty two thousands eight hundred and seventy six",
-	32876:        "thirty two thousands eight hundred and seventy six",
+	898982332876: "eight hundred and ninety eight billion nine hundred and eighty two million three hundred and thirty two thousand eight hundred and seventy six",
+	32876:        "thirty two thousand eight hundred and seventy six",
 	1544:         "one thousand five hundred and fourty four",
-	2987:         "two thousands nine hundred and eighty seven",
-	3110:         "three thousands one hundred and ten",
+	2987:         "two thousand nine hundred and eighty seven",
+	3110:         "three thousand one hundred and ten",
 }
 
 var predefined = map[int]string{
