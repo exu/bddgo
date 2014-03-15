@@ -42,4 +42,7 @@ var _ = Describe("Stats generator", func() {
 	It("collects len information", func() {
 		Expect(result["len"]).To(Equal(10))
 	})
+	It("collects sum information", func() {
+		Expect(result["sum"]).To(Equal(100))
+	})
 })

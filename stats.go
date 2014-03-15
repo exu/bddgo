@@ -19,6 +19,7 @@ func Collect(arr []int) map[string]int {
 	out["len"] = count
 	out["avg"] = sum / count
 	out["max"] = max
+	out["sum"] = sum
 
 	return out
 }
